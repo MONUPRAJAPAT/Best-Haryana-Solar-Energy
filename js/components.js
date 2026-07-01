@@ -192,11 +192,30 @@
   </footer>`;
   }
 
-  /* ---------- Floating action buttons ---------- */
+  /* ---------- Floating action buttons + chatbot ---------- */
   function tplFloatingCTAs() {
-    return `<div class="fab-stack" aria-hidden="false">
-    <a class="fab fab--wa" href="https://wa.me/919050984623?text=Hi%2C%20I%27m%20interested%20in%20solar%20installation" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">${WA_PLAIN_SVG}</a>
-    <a class="fab fab--call" href="tel:+919050984623" aria-label="Call now"><i data-lucide="phone"></i></a>
+    return `<div class="floating-layer">
+    <div class="fab-stack" aria-hidden="false">
+      <a class="fab fab--wa" href="https://wa.me/919050984623?text=Hi%2C%20I%27m%20interested%20in%20solar%20installation" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">${WA_PLAIN_SVG}</a>
+      <a class="fab fab--call" href="tel:+919050984623" aria-label="Call now"><i data-lucide="phone"></i></a>
+    </div>
+
+    <div class="chatbot" id="chatbot">
+      <button class="chatbot-fab" id="chatbotToggle" aria-label="Ask a question" aria-expanded="false" aria-controls="chatbotPanel">
+        <span class="chatbot-fab-icon chatbot-fab-icon--close"><i data-lucide="x"></i></span>
+        <span class="chatbot-fab-label">Ask us</span>
+        <span class="chatbot-fab-shine" aria-hidden="true"></span>
+      </button>
+
+      <div class="chatbot-panel" id="chatbotPanel" role="dialog" aria-label="Solar Assistant" aria-hidden="true">
+        <button class="chatbot-close" id="chatbotClose" aria-label="Close chat"><i data-lucide="x"></i></button>
+        <div class="chatbot-body" id="chatbotBody" aria-live="polite"></div>
+        <form class="chatbot-form" id="chatbotForm" autocomplete="off">
+          <input type="text" id="chatbotInput" placeholder="Type your question&hellip;" aria-label="Type your question" />
+          <button type="submit" aria-label="Send message"><i data-lucide="send-horizontal"></i></button>
+        </form>
+      </div>
+    </div>
   </div>`;
   }
 
