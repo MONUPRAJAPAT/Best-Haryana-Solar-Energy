@@ -201,6 +201,7 @@
     </div>
 
     <div class="chatbot" id="chatbot">
+      <div class="chatbot-backdrop" id="chatbotBackdrop" aria-hidden="true"></div>
       <button class="chatbot-fab" id="chatbotToggle" aria-label="Ask a question" aria-expanded="false" aria-controls="chatbotPanel">
         <span class="chatbot-fab-icon chatbot-fab-icon--close"><i data-lucide="x"></i></span>
         <span class="chatbot-fab-label">Ask us</span>

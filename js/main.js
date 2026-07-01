@@ -99,6 +99,7 @@
     const toggle = document.getElementById('chatbotToggle');
     const panel  = document.getElementById('chatbotPanel');
     const closeB = document.getElementById('chatbotClose');
+    const backdrop = document.getElementById('chatbotBackdrop');
     const body   = document.getElementById('chatbotBody');
     const form   = document.getElementById('chatbotForm');
     const input  = document.getElementById('chatbotInput');
@@ -227,13 +228,41 @@
       scrollDown();
     }
 
-    function botSay(html, chipItems) {
-      const typing = addMsg('<span class="chatbot-typing"><i></i><i></i><i></i></span>', 'bot');
-      setTimeout(function () {
-        typing.innerHTML = html;
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Reveal HTML answer token-by-token (typewriter), keeping tags/entities/emoji intact
+    function typeInto(el, html, done) {
+      var tokens = html.match(/<[^>]+>|&[a-zA-Z]+;|&#\d+;|[\uD800-\uDBFF][\uDC00-\uDFFF]|[\s\S]/g) || [];
+      var i = 0;
+      el.innerHTML = '';
+      el.classList.add('is-typing');
+      (function step() {
+        if (i >= tokens.length) {
+          el.classList.remove('is-typing');
+          if (done) done();
+          return;
+        }
+        i++;
+        el.innerHTML = tokens.slice(0, i).join('');
         scrollDown();
-        if (chipItems) showChips(chipItems);
-      }, 420);
+        var tok = tokens[i - 1];
+        setTimeout(step, tok && tok.charAt(0) === '<' ? 0 : 13);
+      })();
+    }
+
+    function botSay(html, chipItems) {
+      var bubble = addMsg('<span class="chatbot-typing"><i></i><i></i><i></i></span>', 'bot');
+      setTimeout(function () {
+        if (reduceMotion) {
+          bubble.innerHTML = html;
+          scrollDown();
+          if (chipItems) showChips(chipItems);
+          return;
+        }
+        typeInto(bubble, html, function () {
+          if (chipItems) showChips(chipItems);
+        });
+      }, 380);
     }
 
     // Chip builders
@@ -335,6 +364,7 @@
 
     toggle.addEventListener('click', function () { opened ? closePanel() : openPanel(); });
     if (closeB) closeB.addEventListener('click', closePanel);
+    if (backdrop) backdrop.addEventListener('click', closePanel);
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && opened) closePanel(); });
 
     form.addEventListener('submit', function (e) {

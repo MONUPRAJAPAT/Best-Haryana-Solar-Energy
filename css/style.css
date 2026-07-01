@@ -3863,9 +3863,25 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
    ========================================================= */
 .chatbot { position: fixed; left: 16px; bottom: 20px; z-index: 60; }
 
+/* Focus backdrop — subtle dim + blur behind the chat on mobile */
+.chatbot-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  background: rgba(12,18,28,0.28);
+  -webkit-backdrop-filter: blur(3px);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+}
+.chatbot.is-open .chatbot-backdrop { opacity: 1; pointer-events: auto; }
+@media (min-width: 768px) { .chatbot-backdrop { display: none; } }
+
 /* Launch button */
 .chatbot-fab {
   position: relative;
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -3932,6 +3948,7 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
   position: absolute;
   left: 0;
   bottom: calc(100% + 14px);
+  z-index: 3;
   width: min(360px, calc(100vw - 32px));
   max-height: min(72vh, 560px);
   display: flex;
@@ -4015,6 +4032,19 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
 }
 .chatbot-msg a { color: #0E8FE0; font-weight: 600; text-decoration: underline; }
 .chatbot-msg--user a { color: #fff; }
+/* Blinking caret while the bot is typing (ChatGPT-style) */
+.chatbot-msg.is-typing::after {
+  content: '';
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  margin-left: 2px;
+  vertical-align: -2px;
+  background: currentColor;
+  opacity: 0.55;
+  animation: chatbot-caret 0.8s steps(1) infinite;
+}
+@keyframes chatbot-caret { 0%, 50% { opacity: 0.55; } 51%, 100% { opacity: 0; } }
 
 /* Typing indicator */
 .chatbot-typing { display: inline-flex; gap: 4px; padding: 2px 0; }
