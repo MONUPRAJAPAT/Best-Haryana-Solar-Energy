@@ -27,22 +27,24 @@
     let path = window.location.pathname;
     // Strip trailing slash
     path = path.replace(/\/$/, '');
-    // Take last segment
-    const seg = path.split('/').pop() || 'index.html';
+    // Take last segment, then normalize away the .html extension so this works
+    // with clean URLs (Vercel cleanUrls -> "/about") and .html URLs alike.
+    let seg = path.split('/').pop() || '';
+    seg = seg.replace(/\.html$/i, '');
     return seg;
   }
   function activeKey() {
     const p = currentPage();
-    if (!p || p === '' || p === 'index.html') return 'home';
-    if (p === 'services.html') return 'services';
-    if (p.indexOf('services/') !== -1 || window.location.pathname.indexOf('/services/') !== -1) return 'services';
-    if (p === 'calculator.html') return 'calculator';
-    if (p === 'subsidy.html') return 'subsidy';
-    if (p === 'projects.html') return 'projects';
-    if (p === 'service-area.html') return 'service-area';
-    if (p === 'about.html') return 'about';
-    if (p === 'contact.html') return 'contact';
-    if (p === 'faq.html') return 'faq';
+    if (window.location.pathname.indexOf('/services/') !== -1) return 'services';
+    if (!p || p === 'index') return 'home';
+    if (p === 'services') return 'services';
+    if (p === 'calculator') return 'calculator';
+    if (p === 'subsidy') return 'subsidy';
+    if (p === 'projects') return 'projects';
+    if (p === 'service-area') return 'service-area';
+    if (p === 'about') return 'about';
+    if (p === 'contact') return 'contact';
+    if (p === 'faq') return 'faq';
     return '';
   }
 
