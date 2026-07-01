@@ -3139,8 +3139,17 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
 }
 .mobile-menu a.is-active, .mobile-menu a[aria-current="page"] {
   background: var(--sun-50);
-  color: var(--set-700);
-  border-color: var(--sun-100);
+  color: var(--set-600);
+  border-color: var(--sun-300);
+  font-weight: 700;
+}
+.mobile-menu a.is-active::after, .mobile-menu a[aria-current="page"]::after {
+  content: '';
+  margin-left: auto;
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--grad-sun);
+  box-shadow: 0 0 0 3px rgba(232,155,45,0.15);
 }
 
 /* ── Service detail page ─────────────────────────────────── */
