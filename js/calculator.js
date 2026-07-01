@@ -94,9 +94,13 @@
   // ── CTA: scroll to contact form ──────────────────────────
   if (ctaQuote) {
     ctaQuote.addEventListener('click', function (e) {
-      e.preventDefault();
       const contact = document.getElementById('contact');
-      if (contact) contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Smooth-scroll only if a contact section exists on this page;
+      // otherwise let the link navigate normally (e.g. to contact.html#contact).
+      if (contact) {
+        e.preventDefault();
+        contact.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     });
   }
 
