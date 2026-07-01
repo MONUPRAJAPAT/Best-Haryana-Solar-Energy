@@ -144,7 +144,7 @@
           </a>
           <p class="footer-tagline">"Sunlight is free. Your bill shouldn't be either."</p>
           <div class="footer-socials">
-            <a class="footer-social" href="https://www.facebook.com/profile.php?id=61560082832521" target="_blank" rel="noopener" aria-label="Facebook">${FB_SVG}</a>
+            <a class="footer-social" href="https://www.facebook.com/profile.php?id=100034178078399" target="_blank" rel="noopener" aria-label="Facebook">${FB_SVG}</a>
             <a class="footer-social" href="https://www.instagram.com/best.haryanasolarenergy/" target="_blank" rel="noopener" aria-label="Instagram">${IG_SVG}</a>
             <a class="footer-social" href="https://wa.me/919050984623" target="_blank" rel="noopener" aria-label="WhatsApp">${WA_PLAIN_SVG}</a>
           </div>
