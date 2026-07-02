@@ -90,6 +90,23 @@
   document.addEventListener('DOMContentLoaded', initSmoothScroll);
   document.addEventListener('components:ready', initSmoothScroll);
 
+  /* ---------- Home: reveal floating WhatsApp/Call FABs after the hero ---------- */
+  function initHomeFabs() {
+    if (!document.body.classList.contains('page-home')) return;
+    if (document.body.dataset.fabsBound) return;
+    document.body.dataset.fabsBound = '1';
+    const hero = document.querySelector('.v-hero');
+    function threshold() { return (hero ? hero.offsetHeight : window.innerHeight) * 0.7; }
+    function onScroll() {
+      document.body.classList.toggle('fabs-shown', window.scrollY > threshold());
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    onScroll();
+  }
+  document.addEventListener('DOMContentLoaded', initHomeFabs);
+  document.addEventListener('components:ready', initHomeFabs);
+
   /* ---------- Solar Assistant (rule-based FAQ chatbot) ---------- */
   function initChatbot() {
     const root = document.getElementById('chatbot');

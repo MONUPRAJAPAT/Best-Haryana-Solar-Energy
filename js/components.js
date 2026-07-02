@@ -190,6 +190,9 @@
         <span>&copy; 2026 Best Haryana Solar Energy. All rights reserved.</span>
         <span>Karnal, Haryana, India</span>
       </div>
+      <div class="footer-credit">
+        <span>Developed by <strong>Monu Prajapat</strong> &middot; <a href="tel:+919996105221">99961&nbsp;05221</a></span>
+      </div>
     </div>
   </footer>`;
   }
@@ -204,9 +207,9 @@
 
     <div class="chatbot" id="chatbot">
       <div class="chatbot-backdrop" id="chatbotBackdrop" aria-hidden="true"></div>
-      <button class="chatbot-fab" id="chatbotToggle" aria-label="Ask a question" aria-expanded="false" aria-controls="chatbotPanel">
+      <button class="chatbot-fab" id="chatbotToggle" aria-label="Chat with us" aria-expanded="false" aria-controls="chatbotPanel">
+        <span class="chatbot-fab-icon chatbot-fab-icon--open"><i data-lucide="message-circle"></i></span>
         <span class="chatbot-fab-icon chatbot-fab-icon--close"><i data-lucide="x"></i></span>
-        <span class="chatbot-fab-label">Ask us</span>
         <span class="chatbot-fab-shine" aria-hidden="true"></span>
       </button>
 

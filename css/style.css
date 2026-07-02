@@ -2438,6 +2438,15 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
   color: rgba(251,246,236,0.5);
   text-align: center;
 }
+.footer-credit {
+  padding-top: var(--space-3);
+  text-align: center;
+  font-size: 0.78rem;
+  color: rgba(251,246,236,0.4);
+}
+.footer-credit strong { color: rgba(251,246,236,0.6); font-weight: 600; }
+.footer-credit a { color: rgba(251,246,236,0.55); }
+.footer-credit a:hover { color: var(--sun-300); }
 
 
 /* =========================================================
@@ -2446,25 +2455,39 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
 .fab-stack {
   position: fixed;
   right: 16px;
-  bottom: 90px;
+  bottom: 18px;
   z-index: 40;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
+}
+
+/* On the landing page the hero already shows WhatsApp + Call CTAs, so the
+   FABs stay hidden while the hero is in view and fade in once you scroll past it. */
+.page-home .fab-stack {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity var(--t-med), transform var(--t-med), visibility var(--t-med);
+}
+.page-home.fabs-shown .fab-stack {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
 .fab {
-  width: 58px; height: 58px;
+  width: 50px; height: 50px;
   border-radius: 50%;
   display: grid;
   place-items: center;
   color: var(--white);
-  box-shadow: 0 14px 30px rgba(31,22,18,0.25);
+  box-shadow: 0 8px 22px rgba(31,22,18,0.22);
   position: relative;
-  transition: transform var(--t-fast);
+  transition: transform var(--t-fast), box-shadow var(--t-med);
 }
-.fab:hover { transform: scale(1.08); }
-.fab svg { width: 26px; height: 26px; }
+.fab:hover { transform: translateY(-2px) scale(1.05); box-shadow: 0 12px 28px rgba(31,22,18,0.28); }
+.fab svg { width: 22px; height: 22px; }
 
 .fab--wa { background: var(--green-wa); }
 .fab--call { background: var(--grad-sun); color: var(--ink-900); }
@@ -2474,14 +2497,14 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
   position: absolute;
   inset: 0;
   border-radius: 50%;
-  animation: fab-pulse 2.4s infinite;
+  animation: fab-pulse 2.6s infinite;
 }
 .fab--wa::before { box-shadow: 0 0 0 0 rgba(37,211,102,0.55); }
 .fab--call::before { box-shadow: 0 0 0 0 rgba(232,155,45,0.55); }
 
 @keyframes fab-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
-  70% { box-shadow: 0 0 0 16px rgba(255,255,255,0); }
+  0% { box-shadow: 0 0 0 0 rgba(255,255,255,0.35); }
+  70% { box-shadow: 0 0 0 12px rgba(255,255,255,0); }
   100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
 }
 
@@ -3019,6 +3042,66 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
   font-size: 1rem;
   line-height: 1.6;
 }
+
+/* ── Team ─────────────────────────────────────────────────── */
+.team-photo {
+  margin: 0 0 var(--space-8);
+  border-radius: var(--r-lg, 22px);
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(31,22,18,0.16);
+}
+.team-photo img { display: block; width: 100%; height: auto; }
+
+.team-grid {
+  display: grid;
+  gap: var(--space-4);
+}
+@media (min-width: 640px) { .team-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .team-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.team-card {
+  background: var(--paper-soft);
+  border: 1px solid var(--ink-100);
+  border-radius: 18px;
+  padding: var(--space-5);
+  transition: transform var(--t-med), box-shadow var(--t-med);
+}
+.team-card:hover { transform: translateY(-3px); box-shadow: 0 14px 34px rgba(31,22,18,0.10); }
+.team-card--lead {
+  background: var(--ink-900);
+  border-color: transparent;
+  color: var(--paper-soft);
+}
+
+.team-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--set-600);
+  margin-bottom: var(--space-3);
+}
+.team-role svg { width: 16px; height: 16px; }
+.team-card--lead .team-role { color: var(--sun-300); }
+
+.team-card h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.5rem;
+  color: var(--ink-900);
+  margin: 0 0 var(--space-2);
+  letter-spacing: -0.01em;
+}
+.team-card--lead h3 { color: var(--paper-soft); }
+.team-card p { margin: 0; color: var(--ink-600); line-height: 1.6; }
+.team-card--lead p { color: rgba(251,246,236,0.82); }
+.team-card--lead p strong { color: var(--sun-300); }
+.team-names { font-weight: 600; color: var(--ink-900); font-size: 1.05rem; }
+.team-note { font-size: 0.85rem; color: var(--ink-500); margin-top: 4px; }
 
 /* ── CTA band (big closing call to action) ────────────────── */
 .cta-band {
@@ -3891,17 +3974,15 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
 .chatbot-fab {
   position: relative;
   z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  height: 54px;
-  padding: 0 24px;
+  display: grid;
+  place-items: center;
+  width: 58px; height: 58px;
   border: none;
-  border-radius: var(--r-pill);
+  border-radius: 50%;
   background: linear-gradient(135deg, #38BDF8 0%, #0EA5E9 100%);
   color: #fff;
   cursor: pointer;
-  box-shadow: 0 12px 30px rgba(14,165,233,0.38);
+  box-shadow: 0 10px 26px rgba(14,165,233,0.42);
   transition: transform var(--t-fast), box-shadow var(--t-med);
 }
 .chatbot-fab:hover { transform: translateY(-2px); box-shadow: 0 18px 40px rgba(14,165,233,0.46); }
@@ -3942,13 +4023,11 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
   animation: cta-mirror 4.2s ease-in-out infinite;
 }
 .chatbot-fab-icon { display: inline-grid; place-items: center; }
-.chatbot-fab-icon svg { width: 22px; height: 22px; }
+.chatbot-fab-icon svg { width: 26px; height: 26px; }
 .chatbot-fab-icon--close { display: none; }
-.chatbot-fab-label { font-family: var(--font-body); font-weight: 600; font-size: 0.95rem; }
 .chatbot.is-open .chatbot-fab-icon--open { display: none; }
 .chatbot.is-open .chatbot-fab-icon--close { display: inline-grid; }
-.chatbot.is-open .chatbot-fab-label { display: none; }
-.chatbot.is-open .chatbot-fab { padding: 0; width: 54px; justify-content: center; background: #0284C7; }
+.chatbot.is-open .chatbot-fab { background: #0284C7; }
 /* No mirror glare over the close (✕) icon when the chat is open */
 .chatbot.is-open .chatbot-fab-shine { display: none; }
 

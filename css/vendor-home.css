@@ -70,7 +70,8 @@
    ════════════════════════════════════════════════ */
 .v-hero {
   position: relative;
-  min-height: 92vh;
+  min-height: 100vh;
+  min-height: 100dvh; /* full screen on mobile without address-bar overflow */
   padding: calc(var(--header-h) + var(--space-12)) 0 var(--space-12);
   overflow: hidden;
   display: flex;
@@ -282,7 +283,7 @@
 }
 
 @media (min-width: 1024px) {
-  .v-hero { min-height: 94vh; }
+  .v-hero { min-height: 100vh; min-height: 100dvh; }
   .v-hero-trust { font-size: 0.92rem; }
 }
 
