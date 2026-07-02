@@ -70,8 +70,7 @@
    ════════════════════════════════════════════════ */
 .v-hero {
   position: relative;
-  min-height: 100vh;
-  min-height: 100dvh; /* fills the screen on mobile without address-bar overflow */
+  min-height: 92vh;
   padding: calc(var(--header-h) + var(--space-12)) 0 var(--space-12);
   overflow: hidden;
   display: flex;
