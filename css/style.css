@@ -132,7 +132,9 @@
 
   --container: 1240px;
   --container-narrow: 880px;
-  --header-h: 72px;
+  --nav-h: 72px;
+  --announce-h: 34px;
+  --header-h: calc(var(--nav-h) + var(--announce-h)); /* full fixed-header stack */
 }
 
 
@@ -451,6 +453,42 @@ em { font-style: italic; }
               border-color var(--t-med), backdrop-filter var(--t-med);
 }
 
+/* ── Announcement bar (top of the fixed header) ──────────── */
+.announce-bar {
+  height: var(--announce-h);
+  background: var(--ink-900);
+  overflow: hidden;
+}
+.announce-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 100%;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
+  color: var(--paper-soft);
+  white-space: nowrap;
+  text-decoration: none;
+}
+.announce-inner strong { color: var(--sun-300); font-weight: 700; }
+.announce-icon { width: 15px; height: 15px; color: var(--sun-300); flex-shrink: 0; }
+.announce-arrow {
+  width: 14px; height: 14px;
+  color: var(--sun-300);
+  flex-shrink: 0;
+  transition: transform var(--t-fast);
+}
+.announce-inner:hover .announce-arrow { transform: translateX(4px); }
+.announce-full { display: none; }
+.announce-short { display: inline; overflow: hidden; text-overflow: ellipsis; }
+@media (min-width: 700px) {
+  .announce-full { display: inline; }
+  .announce-short { display: none; }
+}
+
 .site-header.is-scrolled {
   background: rgba(251,246,236,0.92);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
@@ -491,7 +529,7 @@ em { font-style: italic; }
 }
 
 .header-inner {
-  height: var(--header-h);
+  height: var(--nav-h);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -2589,7 +2627,7 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
 
 /* >=1024px desktop */
 @media (min-width: 1024px) {
-  :root { --header-h: 84px; }
+  :root { --nav-h: 84px; } /* --header-h recomputes = nav + announce */
 
   .nav { display: flex; }
   .header-cta { display: inline-flex; }
@@ -2684,7 +2722,7 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
 
 /* ── Page-hero block ──────────────────────────────────────── */
 .page-hero {
-  padding: var(--space-12) 0 var(--space-10);
+  padding: calc(var(--header-h) + var(--space-5)) 0 var(--space-10);
   position: relative;
   overflow: hidden;
 }
@@ -3102,6 +3140,123 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
 .team-card--lead p strong { color: var(--sun-300); }
 .team-names { font-weight: 600; color: var(--ink-900); font-size: 1.05rem; }
 .team-note { font-size: 0.85rem; color: var(--ink-500); margin-top: 4px; }
+
+/* Leadership photo cards */
+.team-leads {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+  max-width: 520px;
+  margin: 0 auto var(--space-8);
+}
+@media (min-width: 640px) { .team-leads { gap: var(--space-6); } }
+.team-lead { text-align: center; }
+.team-lead-photo {
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: var(--space-3);
+  box-shadow: 0 14px 34px rgba(31,22,18,0.14);
+  background: var(--ivory);
+}
+.team-lead-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.5s var(--ease, ease);
+}
+.team-lead:hover .team-lead-photo img { transform: scale(1.04); }
+.team-lead h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.25rem;
+  color: var(--ink-900);
+  margin: 0 0 2px;
+}
+.team-lead-role {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--set-600);
+}
+
+/* Leadership: 3-up (founder, team lead, manager) */
+.team-leads--3 {
+  grid-template-columns: 1fr;
+  max-width: 360px;
+}
+@media (min-width: 620px) {
+  .team-leads--3 { grid-template-columns: repeat(3, 1fr); max-width: 820px; }
+}
+.founder-quote--center {
+  border-left: none;
+  padding-left: 0;
+  text-align: center;
+  max-width: 640px;
+  margin: var(--space-8) auto 0;
+}
+.founder-quote--center cite {
+  display: block;
+  margin-top: var(--space-3);
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--ink-500);
+}
+
+/* Airtel partnership band */
+.airtel-inner {
+  display: grid;
+  gap: var(--space-8);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .airtel-inner { grid-template-columns: 1.25fr 1fr; gap: var(--space-12); }
+}
+.airtel-copy h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 3vw + 1rem, 2.8rem);
+  color: var(--paper-soft);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: var(--space-2) 0 var(--space-4);
+}
+.airtel-copy h2 em { font-style: italic; color: var(--sun-300); }
+.airtel-copy p { color: rgba(251,246,236,0.8); line-height: 1.7; margin: 0; }
+.airtel-copy p strong { color: var(--sun-300); font-weight: 600; }
+.airtel-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+.airtel-stat {
+  text-align: center;
+  padding: var(--space-5) var(--space-2);
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+}
+.airtel-num {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 2vw + 1rem, 2.1rem);
+  color: var(--sun-300);
+  line-height: 1;
+}
+.airtel-lbl {
+  display: block;
+  margin-top: 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(251,246,236,0.6);
+}
 
 /* ── CTA band (big closing call to action) ────────────────── */
 .cta-band {
@@ -3998,38 +4153,42 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
   z-index: 2;
 }
 .chatbot.is-open .chatbot-fab::after { display: none; }
-/* Mirror-glare sweep (same as the Call Now button) */
-.chatbot-fab-shine {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 1;
-}
-.chatbot-fab-shine::before {
-  content: '';
-  position: absolute;
-  top: -20%; bottom: -20%;
-  left: -60%;
-  width: 45%;
-  background: linear-gradient(100deg,
-    transparent 0%,
-    rgba(255,255,255,0.12) 35%,
-    rgba(255,255,255,0.6) 50%,
-    rgba(255,255,255,0.12) 65%,
-    transparent 100%);
-  transform: skewX(-22deg);
-  animation: cta-mirror 4.2s ease-in-out infinite;
-}
 .chatbot-fab-icon { display: inline-grid; place-items: center; }
 .chatbot-fab-icon svg { width: 26px; height: 26px; }
+.chatbot-fab-icon--open svg { width: 40px; height: 40px; }
 .chatbot-fab-icon--close { display: none; }
+
+/* Animated robot mascot */
+.bot-icon { animation: bot-bob 3.2s ease-in-out infinite; will-change: transform; }
+.bot-icon .bot-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bot-blink 4s infinite;
+}
+.bot-icon .bot-antenna {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: bot-antenna 2s ease-in-out infinite;
+}
+.chatbot-fab:hover .bot-icon { animation-duration: 1.6s; }
+@keyframes bot-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-1.6px); }
+}
+@keyframes bot-blink {
+  0%, 46%, 54%, 100% { transform: scaleY(1); }
+  50% { transform: scaleY(0.12); }
+}
+@keyframes bot-antenna {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.7); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bot-icon, .bot-icon .bot-eye, .bot-icon .bot-antenna { animation: none; }
+}
 .chatbot.is-open .chatbot-fab-icon--open { display: none; }
 .chatbot.is-open .chatbot-fab-icon--close { display: inline-grid; }
 .chatbot.is-open .chatbot-fab { background: #0284C7; }
-/* No mirror glare over the close (✕) icon when the chat is open */
-.chatbot.is-open .chatbot-fab-shine { display: none; }
 
 /* Panel */
 .chatbot-panel {
@@ -4235,5 +4394,4 @@ input[type="range"].calc-slider::-webkit-slider-thumb:hover { transform: scale(1
   .chatbot-panel { transition: opacity 0.2s ease; transform: none; }
   .chatbot.is-open .chatbot-panel { transform: none; }
   .chatbot-typing i { animation: none; }
-  .chatbot-fab-shine::before { display: none; }
 }

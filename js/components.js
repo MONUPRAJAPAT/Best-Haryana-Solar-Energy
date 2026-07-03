@@ -86,6 +86,14 @@
     }).join('');
 
     return `<header class="site-header" role="banner">
+    <div class="announce-bar">
+      <a class="container announce-inner" href="${href('about.html')}#airtel" aria-label="Now an Airtel solar partner — read more">
+        <i data-lucide="zap" class="announce-icon" aria-hidden="true"></i>
+        <span class="announce-full">Now solar-powering <strong>1,000&nbsp;Airtel sites</strong> &mdash; a 5&nbsp;MW clean-energy partnership</span>
+        <span class="announce-short"><strong>Airtel</strong> solar partner &middot; 1,000 sites</span>
+        <i data-lucide="arrow-right" class="announce-arrow" aria-hidden="true"></i>
+      </a>
+    </div>
     <div class="container header-inner">
       <a href="${href('index.html')}" class="brand" aria-label="Best Haryana Solar Energy - Home">
         <span class="brand-mark" aria-hidden="true">
@@ -208,9 +216,8 @@
     <div class="chatbot" id="chatbot">
       <div class="chatbot-backdrop" id="chatbotBackdrop" aria-hidden="true"></div>
       <button class="chatbot-fab" id="chatbotToggle" aria-label="Chat with us" aria-expanded="false" aria-controls="chatbotPanel">
-        <span class="chatbot-fab-icon chatbot-fab-icon--open"><i data-lucide="message-circle"></i></span>
+        <span class="chatbot-fab-icon chatbot-fab-icon--open"><svg class="bot-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><line x1="12" y1="2.2" x2="12" y2="4.8" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle class="bot-antenna" cx="12" cy="2" r="1.5" fill="currentColor"/><rect x="4" y="5" width="16" height="12.5" rx="3.8" stroke="currentColor" stroke-width="1.7"/><path d="M2 10.5v2.5M22 10.5v2.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><circle class="bot-eye" cx="9" cy="11" r="1.5" fill="currentColor"/><circle class="bot-eye" cx="15" cy="11" r="1.5" fill="currentColor"/><path d="M9.5 14.4c.75.55 1.6.8 2.5.8s1.75-.25 2.5-.8" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></span>
         <span class="chatbot-fab-icon chatbot-fab-icon--close"><i data-lucide="x"></i></span>
-        <span class="chatbot-fab-shine" aria-hidden="true"></span>
       </button>
 
       <div class="chatbot-panel" id="chatbotPanel" role="dialog" aria-label="Solar Assistant" aria-hidden="true">
